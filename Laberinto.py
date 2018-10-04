@@ -18,8 +18,6 @@ def comprobarValidezCoordenadas(laberinto):
             return True
     return False
 
-
-
 laberinto = cargarLaberinto(nombreArchivo)
 
 print comprobarValidezCoordenadas(laberinto)
