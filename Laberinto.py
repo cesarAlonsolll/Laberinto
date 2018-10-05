@@ -4,8 +4,7 @@ def cargarLaberinto(nombre):
     
     lector = open(nombre,"r")
     laberinto = lector.read().replace(' ','').replace(',','').split('\n')
-    laberinto = [tuple(map(int, tupla)) for tupla in laberinto]
-    return tuple([tuple(linea) for linea in laberinto])
+    return tuple([tuple(map(int, linea)) for linea in laberinto])
 
 def comprobarValidezLaberinto(laberinto):
     if (len(laberinto)-2)>3 and len(laberinto[0])>3:
@@ -17,8 +16,6 @@ def comprobarValidezCoordenadas(laberinto):
         if laberinto[-1][1]<len(laberinto[0]) and laberinto[-2][1]<len(laberinto[0]):
             return True
     return False
-
-
 
 laberinto = cargarLaberinto(nombreArchivo)
 
