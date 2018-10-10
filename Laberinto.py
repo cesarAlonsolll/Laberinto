@@ -1,7 +1,6 @@
 nombreArchivo = "TextoLaberinto.txt"
 
 def cargarLaberinto(nombre):
-    
     lector = open(nombre,"r")
     laberinto = lector.read().replace(',',' ').split('\n')
     return tuple([tuple(map(int, linea.split())) for linea in laberinto])
@@ -30,20 +29,20 @@ def comprobarExistenciaRuta(laberinto):
         def comprobarCamino(coordenadasA, coordenadasF, y, x):
             return laberinto[coordenadasA[0]+y][coordenadasA[1]+x]==0
         
-        def iniciar(coordenadasA, coordenadasF, visitadas):
+        def iniciar(coordenadasA, coordenadasF):
             if comprobarDestino(coordenadasA, coordenadasF):
                 return True
             if comprobarCamino(coordenadasA, coordenadasF, -1, 0):
-                return avanzar( (coordenadasA[0]-1,coordenadasA[1]), coordenadasF, visitadas+[coordenadasA],
+                return avanzar( (coordenadasA[0]-1,coordenadasA[1]), coordenadasF, [coordenadasA],
                                ((-1, 0), (0, 1), (0, -1)))
             if comprobarCamino(coordenadasA, coordenadasF, 0, 1):
-                return avanzar( (coordenadasA[0],coordenadasA[1]+1), coordenadasF, visitadas+[coordenadasA],
+                return avanzar( (coordenadasA[0],coordenadasA[1]+1), coordenadasF, [coordenadasA],
                                ((0, 1), (1, 0), (-1, 0)))
             if comprobarCamino(coordenadasA, coordenadasF, 1, 0):
-                return avanzar( (coordenadasA[0]+1,coordenadasA[1]), coordenadasF, visitadas+[coordenadasA],
+                return avanzar( (coordenadasA[0]+1,coordenadasA[1]), coordenadasF, [coordenadasA],
                                ((1, 0), (0, -1), (0, 1)))
             if comprobarCamino(coordenadasA, coordenadasF, 0, -1):
-                return avanzar( (coordenadasA[0],coordenadasA[1]-1), coordenadasF, visitadas+[coordenadasA],
+                return avanzar( (coordenadasA[0],coordenadasA[1]-1), coordenadasF, [coordenadasA],
                                ((0, -1), (-1, 0), (1, 0)))
             return False
         
@@ -66,7 +65,7 @@ def comprobarExistenciaRuta(laberinto):
                     return True
             return False
         
-        return iniciar(laberinto[-2], laberinto[-1], [])
+        return iniciar(laberinto[-2], laberinto[-1])
         
     return False
 
